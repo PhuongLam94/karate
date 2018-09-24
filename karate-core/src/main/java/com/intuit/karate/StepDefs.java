@@ -307,7 +307,13 @@ public class StepDefs {
     @When("^def (\\w+) = (.+)")
     public void def(String name, String expression) {
         Script.assign(name, expression, context, true);
-    }    
+    }
+    @When("^double-eval (\\w+) = (.+)")
+    public void doubleEval(String name, String expression) {
+        ScriptValue csvText = Script.evalKarateExpression(expression, context);
+        Script.assign(name, csvText.getAsString(), context, true);
+
+    }
 
     @When("^text (.+) =$")
     public void textDocString(String name, String expression) {
